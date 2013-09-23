@@ -13,11 +13,44 @@ define('MODEL_DIR', ROOT_DIR . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR
 //Propel::init(APP_DIR . '/orm/myreka_erp/build/conf/myreka_erp-conf.php');
 //set_include_path(API_ROOT_DIR . '/orm/myreka_erp/build/classes' . PATH_SEPARATOR . get_include_path());
 
-$strcon = "firebird:dbname=192.168.1.4:C:\Program Files\Firebird\Firebird_1_5\examples\EMPLOYEE.FDB";
-$conn = new PDO($strcon, 'SYSDBA', 'masterkey');
-$sql = 'select * from employee';
-$raw = $conn->query($sql);
-foreach($raw as $k => $row) {
-	print $row['EMP_NO'] . '<br/>';
+try{
+	$strcon = "firebird:dbname=192.168.56.101:C:\Program Files\Firebird\Firebird_1_5\examples\EMPLOYEE.FDB";
+	$conn = new PDO($strcon, 'SYSDBA', 'masterkey');
+	
+	//WRITE
+	//$sql = 'INSERT INTO CUSTOMER (CUST_NO, CUSTOMER, COUNTRY) VALUES (1017, \'Care Bear\', \'Russia\')';
+	
+	//UPDATE
+	$sql = "UPDATE CUSTOMER SET CUSTOMER='Azunya nyan~' WHERE CUST_NO=1018";
+	
+	$smt = $conn->prepare($sql);
+	
+	if(!empty($smt)) {
+		$raw = $smt->execute();
+		
+		if(!$raw) {
+			$errMsg = $conn->errorInfo();
+			foreach($errMsg as $msg) {
+				echo "$msg <br/>";
+			}
+		}
+		
+		print ($raw? 'Success': 'Fail '.$conn->errorInfo()) . '<br/>';
+	} else {
+		echo 'Preparation fail<br/>';
+	}
+	
+	
+	//READ
+	
+	$sql = 'select * from CUSTOMER';
+	$raw = $conn->query($sql);
+	foreach($raw as $k => $row) {
+		print $row['CUST_NO'].'&nbsp;'.$row['CUSTOMER'].'&nbsp;'.$row['COUNTRY'].'<br/>';
+	}
+	
+
+} catch(Exception $e) {
+    echo 'Connection failed: ' . $e->getMessage();
 }
 ?>
