@@ -1,5 +1,5 @@
 <?php
-define('ROOT_DIR', dirname(dirname(__FILE__)));
+define('ROOT_DIR', dirname(__FILE__));
 
 define('CONFIG_DIR', ROOT_DIR . DIRECTORY_SEPARATOR . 'config');
 define('APP_DIR', ROOT_DIR . DIRECTORY_SEPARATOR . 'app');
@@ -8,11 +8,17 @@ define('LIB_DIR', ROOT_DIR . DIRECTORY_SEPARATOR . 'lib');
 define('MODULE_DIR', ROOT_DIR . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'module');
 define('MODEL_DIR', ROOT_DIR . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'model');
 
+//DEBUGGING TOOLS
+require_once(LIB_DIR.DIRECTORY_SEPARATOR.'krumo'.DIRECTORY_SEPARATOR.'class.krumo.php');
+
+krumo(array(1,2,3));
+
 //require_once(LIB_DIR . DIRECTORY_SEPARATOR . 'propelorm/runtime/lib/Propel.php');
 
 //Propel::init(APP_DIR . '/orm/myreka_erp/build/conf/myreka_erp-conf.php');
 //set_include_path(API_ROOT_DIR . '/orm/myreka_erp/build/classes' . PATH_SEPARATOR . get_include_path());
 
+/*
 try{
 	$strcon = "firebird:dbname=192.168.56.101:C:\Program Files\Firebird\Firebird_1_5\examples\EMPLOYEE.FDB";
 	$conn = new PDO($strcon, 'SYSDBA', 'masterkey');
@@ -53,4 +59,5 @@ try{
 } catch(Exception $e) {
     echo 'Connection failed: ' . $e->getMessage();
 }
+*/
 ?>
