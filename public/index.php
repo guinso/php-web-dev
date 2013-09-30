@@ -1,5 +1,5 @@
 <?php
-define('ROOT_DIR', dirname(__FILE__));
+define('ROOT_DIR', dirname(dirname(__FILE__)));
 
 define('CONFIG_DIR', ROOT_DIR . DIRECTORY_SEPARATOR . 'config');
 define('APP_DIR', ROOT_DIR . DIRECTORY_SEPARATOR . 'app');
@@ -11,7 +11,8 @@ define('MODEL_DIR', ROOT_DIR . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR
 //DEBUGGING TOOLS
 require_once(LIB_DIR.DIRECTORY_SEPARATOR.'krumo'.DIRECTORY_SEPARATOR.'class.krumo.php');
 
-krumo(array(1,2,3));
+$jam = array(1,2,3);
+krumo($jam);
 
 //require_once(LIB_DIR . DIRECTORY_SEPARATOR . 'propelorm/runtime/lib/Propel.php');
 
